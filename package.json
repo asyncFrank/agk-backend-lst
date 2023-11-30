@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "build":"tsup"
+   
   },
   "keywords": [],
   "author": "",
