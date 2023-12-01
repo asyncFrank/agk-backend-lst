@@ -6,40 +6,11 @@ router.get("/news", async (req, res) => {
   try {
     const term = req.query.term ? req.query.term + "*" : "";
 
-    // let cultivations = req.query.cultivations || "TODAS";
-
-    // const cultivationsOptions = [
-    //   "ALGODÃO",
-    //   "ARROZ",
-    //   "BATATA",
-    //   "CAFÉ",
-    //   "CANA",
-    //   "FEIJÃO",
-    //   "FUMO",
-    //   "HORTIFRUTI",
-    //   "MANDIOCA",
-    //   "MILHO",
-    //   "SOJA",
-    //   "TOMATE",
-    //   "TRIGO",
-    //   "OUTROS",
-    //   "NI",
-    // ];
-    // cultivations === "TODAS"
-    //   ? (cultivations = [...cultivationsOptions])
-    //   : (cultivations = req.query.cultivations.split(","));
-    // req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
-    // let sortBy = {};
-    // if (sort.length > 0) {
-    //   sortBy[sort[0]] = sort[1];
-    // } else {
-    //   sortBy[sort[0]] = "asc";
-    // }
-
-    const news = await News.find({
+       const news = await News.find({
+      
       cultura: { $regex: term, $options: "i" },
-    });
-
+    }).sort({ date: -1});
+    console.log(news);
     const total = await News.countDocuments({
       cultura: { $regex: term, $options: "i" },
     });

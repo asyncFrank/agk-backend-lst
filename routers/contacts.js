@@ -56,7 +56,7 @@ router.get("/contacts", async (req, res) => {
       .sort(sortBy)
       .skip(page * limit)
       .limit(limit);
-
+// console.log(sortBy);
     const total = await Contact.countDocuments({
       cultivations: { $in: [...cultivations] },
       specialties: { $regex: searchSpecialties, $options: "i" },
