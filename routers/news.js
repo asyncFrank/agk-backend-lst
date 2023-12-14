@@ -10,7 +10,7 @@ router.get("/news", async (req, res) => {
       
       cultura: { $regex: term, $options: "i" },
     }).sort({ date: -1});
-    console.log(news);
+    // console.log(news);
     const total = await News.countDocuments({
       cultura: { $regex: term, $options: "i" },
     });
