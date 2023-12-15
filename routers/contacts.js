@@ -9,7 +9,7 @@ router.get("/contacts", async (req, res) => {
     const limit = parseInt(req.query.limit) || 12;
     const search = req.query.search ? req.query.search + "*" : "";
     const searchSpecialties = req.query.searchSpecialties
-      ? req.query.searchSpecialties + "*"
+      ? req.query.searchSpecialties
       : "";
 
     const searchStateBr = req.query.searchStateBr || "";
@@ -47,7 +47,7 @@ router.get("/contacts", async (req, res) => {
     }
 
     const contacts = await Contact.find({
-      business_segment: { $regex: searchSpecialties, $options: "i" },
+      specialties: { $regex: searchSpecialties, $options: "i" },
       profession: { $regex: search, $options: "i" },
       state: { $regex: searchStateBr, $options: "i" },
     })
@@ -62,9 +62,6 @@ router.get("/contacts", async (req, res) => {
       profession: { $regex: search, $options: "i" },
       state: { $regex: searchStateBr, $options: "i" },
     });
-    // const total = await Contact.countDocuments({
-
-    // })
 
     const response = {
       error: false,
