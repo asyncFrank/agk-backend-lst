@@ -51,13 +51,14 @@ router.get("/contacts", async (req, res) => {
       profession: { $regex: search, $options: "i" },
       state: { $regex: searchStateBr, $options: "i" },
     })
-      // .where("cultivations")
-      // .in([...cultivations])
+      .where("cultivations")
+      .in([...cultivations])
       .sort(sortBy)
       .skip(page * limit)
       .limit(limit);
 
     const total = await Contact.countDocuments({
+      cultivations:{$in:[...cultivations]},
       specialties: { $regex: searchSpecialties, $options: "i" },
       profession: { $regex: search, $options: "i" },
       state: { $regex: searchStateBr, $options: "i" },
